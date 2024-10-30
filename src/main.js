@@ -1,8 +1,8 @@
 let config = {
   type: Phaser.AUTO,
   autoCenter: Phaser.Scale.CENTER_BOTH,
-  width: 832,
-  height: 960,
+  width: 820,
+  height: 820,
   zoom: 0.75,
   render: {
     pixelArt: true,
@@ -17,9 +17,11 @@ let config = {
       },
     },
   },
-  scene: [Load, Menu],
+  scene: [Load, Menu, Instructions, Field, Pluck, Credits],
 };
 
 let game = new Phaser.Game(config);
 
 let { width, height } = game.config;
+
+let cursors;
