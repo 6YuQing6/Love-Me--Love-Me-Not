@@ -57,7 +57,7 @@ class Load extends Phaser.Scene {
       repeat: -1,
       frames: this.anims.generateFrameNumbers("justina", {
         start: 1,
-        end: 3,
+        end: 2,
       }),
     });
 
