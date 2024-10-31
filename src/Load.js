@@ -23,6 +23,12 @@ class Load extends Phaser.Scene {
 
     this.load.path = "./assets/";
 
+    // images
+    this.load.image("red-flower", "flower-Red.png");
+    this.load.image("blue-flower", "flower-Blue.png");
+    this.load.image("purple-flower", "flower-Purple.png");
+
+    // sprite sheets
     this.load.spritesheet("justina", "justina-Sheet.png", {
       frameWidth: 20,
       frameHeight: 30,
