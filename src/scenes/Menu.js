@@ -3,12 +3,6 @@ class Menu extends Phaser.Scene {
     super("menuScene");
   }
 
-  preload() {
-    // playFlower = this.load.image();
-    // instructionFlower = this.load.image();
-    // creditFlower = this.load.image();
-  }
-
   create() {
     this.add
       .text(
@@ -19,12 +13,18 @@ class Menu extends Phaser.Scene {
       )
       .setOrigin(0.5);
 
-    const playButton = this.add.image();
-    playButton.setInteractive();
-    const instructionButton = this.add.image();
-    instructionButton.setInteractive();
-    const creditButton = this.add.image();
-    creditButton.setInteractive();
+    this.playButton = this.add
+      .image(30, 50, "red-flower")
+      .setOrigin(0, 0)
+      .setInteractive();
+    this.instructionButton = this.add
+      .image(20, 50, "blue-flower")
+      .setOrigin(0, 0)
+      .setInteractive();
+    this.creditButton = this.add
+      .image(10, 50, "purple-flower")
+      .setOrigin(0, 0)
+      .setInteractive();
 
     cursors = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,
