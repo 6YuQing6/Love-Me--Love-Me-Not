@@ -35,7 +35,6 @@ class IdleState extends State {
       this.stateMachine.transition("walk");
       return;
     }
-    // Empty function body
   }
 }
 
