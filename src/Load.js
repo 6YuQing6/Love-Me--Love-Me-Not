@@ -22,7 +22,26 @@ class Load extends Phaser.Scene {
     });
 
     this.load.path = "./assets/";
-    // loads stuff here
+
+    this.load.spritesheet("justina", "justina-Sheet.png", {
+      frameWidth: 20,
+      frameHeight: 30,
+    });
+
+    this.load.spritesheet("petal-red", "petal-red-Sheet.png", {
+      frameWidth: 210,
+      frameHeight: 180,
+    });
+
+    this.load.spritesheet("petal-blue", "petal-blue-Sheet.png", {
+      frameWidth: 210,
+      frameHeight: 180,
+    });
+
+    this.load.spritesheet("petal-purple", "petal-purple-Sheet.png", {
+      frameWidth: 210,
+      frameHeight: 180,
+    });
   }
   create() {
     this.scene.start("menuScene");
