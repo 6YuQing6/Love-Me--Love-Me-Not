@@ -1,12 +1,11 @@
 class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {
-    super(scene, x, y, "frog");
-
+    super(scene, x, y, "justina");
     this.scene.add.existing(this);
-    // this.scene.physics.add.existing(this);
+    this.scene.physics.add.existing(this);
 
-    this.body.setSize(this.width / 2, this.height / 2);
-    this.body.setOffset(this.width / 4, this.height / 3);
+    // this.body.setSize(this.width / 2, this.height / 2);
+    // this.body.setOffset(this.width / 4, this.height / 3);
     this.setCollideWorldBounds(true);
 
     scene.frogFSM = new StateMachine(
@@ -21,21 +20,19 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 }
 
 class IdleState extends State {
-  enter(scene, frog) {
-    // Empty function body
-  }
+  enter(scene, player) {}
 
-  execute(scene, frog) {
+  execute(scene, player) {
     // Empty function body
   }
 }
 
 class WalkState extends State {
-  enter(scene, frog) {
+  enter(scene, player) {
     // Empty function body
   }
 
-  execute(scene, frog) {
+  execute(scene, player) {
     // Empty function body
   }
 }
