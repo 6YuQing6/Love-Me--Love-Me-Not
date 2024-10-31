@@ -50,6 +50,57 @@ class Load extends Phaser.Scene {
     });
   }
   create() {
+    // justina sprite animations
+    this.anims.create({
+      key: "walk-down",
+      frameRate: "5",
+      repeat: -1,
+      frames: this.anims.generateFrameNumbers("justina", {
+        start: 1,
+        end: 3,
+      }),
+    });
+
+    this.anims.create({
+      key: "walk-up",
+      frameRate: 5,
+      repeat: -1,
+      frames: this.anims.generateFrameNumbers("justina", {
+        start: 5,
+        end: 7,
+      }),
+    });
+
+    this.anims.create({
+      key: "walk-left",
+      frameRate: 5,
+      repeat: -1,
+      frames: this.anims.generateFrameNumbers("justina", {
+        start: 10,
+        end: 11,
+      }),
+    });
+
+    this.anims.create({
+      key: "walk-right",
+      frameRate: 5,
+      repeat: -1,
+      frames: this.anims.generateFrameNumbers("justina", {
+        start: 12,
+        end: 13,
+      }),
+    });
+
+    this.anims.create({
+      key: "idle",
+      frameRate: 5,
+      repeat: -1,
+      frames: this.anims.generateFrameNumbers("justina", {
+        start: 0,
+        end: 0,
+      }),
+    });
+
     this.scene.start("menuScene");
   }
 }
