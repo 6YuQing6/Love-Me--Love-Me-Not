@@ -17,7 +17,7 @@ const config = {
       },
     },
   },
-  scene: [Load, Menu, Instructions, Field, Pluck, Credits],
+  scene: [Load, Menu, Instructions, Field, Pluck, Dialog, Credits],
 };
 
 const game = new Phaser.Game(config);
