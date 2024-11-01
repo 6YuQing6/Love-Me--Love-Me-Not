@@ -11,7 +11,6 @@ class Field extends Phaser.Scene {
   create() {
     // background
     this.cameras.main.setBackgroundColor("#78ac63");
-    // this.background = this.add.tileSprite(0, 0, 832, 960, "sky").setOrigin(0);
 
     this.keys = this.input.keyboard.createCursorKeys();
     this.player = new Player(this, 50, 50).setOrigin(0.5, 0.5);
