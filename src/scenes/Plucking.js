@@ -3,6 +3,10 @@ class Pluck extends Phaser.Scene {
     super("pluckScene");
   }
 
+  init() {
+    this.firstPluck = false;
+  }
+
   create() {
     cursors = this.input.keyboard.createCursorKeys();
     let graphics = this.add.graphics();
@@ -50,25 +54,27 @@ class Pluck extends Phaser.Scene {
       this.scene.stop();
     }
   }
+
   // code from https://www.youtube.com/watch?app=desktop&v=jWglIBp4usY
   makeItDrag(scene, gameObject) {
     gameObject.setInteractive();
 
-    function startDrag() {
+    const startDrag = () => {
       gameObject.off(Phaser.Input.Events.POINTER_DOWN, startDrag);
       gameObject.on(Phaser.Input.Events.POINTER_UP, stopDrag);
       gameObject.on(Phaser.Input.Events.POINTER_MOVE, onDrag);
-    }
+    };
 
-    function stopDrag() {
+    const stopDrag = () => {
       gameObject.off(Phaser.Input.Events.POINTER_DOWN, startDrag);
       gameObject.off(Phaser.Input.Events.POINTER_UP, stopDrag);
       gameObject.off(Phaser.Input.Events.POINTER_MOVE, onDrag);
-      if (!scene.firstDragTriggered) {
-        scene.firstDragTriggered = true;
+      if (!scene.firstPluck) {
         scene.scene.pause("pluckScene");
         scene.scene.launch("dialogScene");
+        scene.firstPluck = true;
       }
+
       gameObject.setGravityY(1000);
 
       const checkPetalPosition = () => {
@@ -92,12 +98,12 @@ class Pluck extends Phaser.Scene {
       };
 
       checkPetalPosition();
-    }
+    };
 
-    function onDrag(pointer) {
+    const onDrag = (pointer) => {
       gameObject.x = pointer.x;
       gameObject.y = pointer.y;
-    }
+    };
 
     gameObject.on(Phaser.Input.Events.POINTER_DOWN, startDrag);
   }
