@@ -14,17 +14,31 @@ class Menu extends Phaser.Scene {
       .setOrigin(0.5);
 
     this.playButton = this.add
-      .image(30, 50, "red-flower")
+      .image(-225, 150, "red-flower")
       .setOrigin(0, 0)
-      .setInteractive();
+      .setInteractive(new Phaser.Geom.Rectangle(250, 100, 230, 500), Phaser.Geom.Rectangle.Contains, { useHandCursor: true })
+      .on("pointerdown", () => this.scene.start("fieldScene"));
+
+      this.add.text(100, 435, "PLAY",
+        { fontFamily: "After Hours", fontSize: 50 }).setOrigin(0, 0).setColor('black')
+
     this.instructionButton = this.add
-      .image(20, 50, "blue-flower")
+      .image(-25, 120, "blue-flower")
       .setOrigin(0, 0)
-      .setInteractive();
+      .setInteractive(new Phaser.Geom.Rectangle(300, 100, 230, 500), Phaser.Geom.Rectangle.Contains, { useHandCursor: true })
+      .on("pointerdown", () => this.scene.start("instructionsScene"));
+
+      this.add.text(340, 420, "HOW2\nPLAY",
+        { fontFamily: "After Hours", fontSize: 50 }).setOrigin(0, 0).setColor('black')
+
     this.creditButton = this.add
-      .image(10, 50, "purple-flower")
+      .image(255, 145, "purple-flower")
       .setOrigin(0, 0)
-      .setInteractive();
+      .setInteractive(new Phaser.Geom.Rectangle(310, 100, 230, 500), Phaser.Geom.Rectangle.Contains, { useHandCursor: true })
+      .on("pointerdown", () => this.scene.start("creditsScene"));
+
+            this.add.text(560, 435, "CREDITS",
+        { fontFamily: "After Hours", fontSize: 50 }).setOrigin(0, 0).setColor('black')
 
     cursors = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,
@@ -36,9 +50,6 @@ class Menu extends Phaser.Scene {
   }
 
   update() {
-    if (Phaser.Input.Keyboard.JustDown(cursors.space)) {
-      this.scene.start("fieldScene");
-    }
     if (Phaser.Input.Keyboard.JustDown(cursors.space)) {
       this.scene.start("fieldScene");
     }
