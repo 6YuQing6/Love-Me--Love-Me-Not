@@ -4,7 +4,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     this.scene.add.existing(this);
     this.scene.physics.add.existing(this);
     this.body.setSize(this.width / 2, this.height / 2);
-    this.setScale(5);
+    this.setScale(3.5);
     this.setCollideWorldBounds(true);
 
     this.direction = "down";
@@ -71,5 +71,9 @@ class WalkState extends State {
       player.playerVelocity * moveDirection.y
     );
     player.anims.play(`walk-${player.direction}`, true);
+  }
+
+  updateVelocity(speed) {
+    this.playerVelocity = speed;
   }
 }

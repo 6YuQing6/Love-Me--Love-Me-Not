@@ -1,4 +1,4 @@
-let config = {
+const config = {
   type: Phaser.AUTO,
   autoCenter: Phaser.Scale.CENTER_BOTH,
   width: 820,
@@ -20,8 +20,9 @@ let config = {
   scene: [Load, Menu, Instructions, Field, Pluck, Credits],
 };
 
-let game = new Phaser.Game(config);
+const game = new Phaser.Game(config);
 
-let { width, height } = game.config;
+const { width, height } = game.config;
+const padding = 50;
 
 let cursors;
