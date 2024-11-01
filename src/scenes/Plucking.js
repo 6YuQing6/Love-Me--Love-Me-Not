@@ -64,8 +64,11 @@ class Pluck extends Phaser.Scene {
       gameObject.off(Phaser.Input.Events.POINTER_DOWN, startDrag);
       gameObject.off(Phaser.Input.Events.POINTER_UP, stopDrag);
       gameObject.off(Phaser.Input.Events.POINTER_MOVE, onDrag);
-      scene.scene.pause("pluckScene");
-      scene.scene.launch("dialogScene");
+      if (!scene.firstDragTriggered) {
+        scene.firstDragTriggered = true;
+        scene.scene.pause("pluckScene");
+        scene.scene.launch("dialogScene");
+      }
       gameObject.setGravityY(1000);
 
       const checkPetalPosition = () => {
