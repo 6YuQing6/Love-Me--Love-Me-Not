@@ -76,7 +76,7 @@ class Field extends Phaser.Scene {
     const texture = this.randomFlowerTexture();
     const x = Math.random() * (width - padding) + padding;
     const y = Math.random() * (height - padding) + padding;
-    const flower = new FlowerPerson(this, x, y, texture).setVisible(true);
+    const flower = new FlowerPerson(this, x, y, texture, this.player).setVisible(true);
     this.flowerPeopleGroup.add(flower);
   }
 
