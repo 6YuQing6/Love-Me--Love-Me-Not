@@ -55,16 +55,7 @@ class Load extends Phaser.Scene {
     });
   }
   create() {
-    // Generate frame numbers for the human-flower sprite sheet
-    const frames = this.anims.generateFrameNumbers("human-flower", {
-      start: 0,
-      end: -1, // -1 means all frames
-    });
-
-    // Log the frames to the console
-    console.log(frames);
     // red human flower animation
-
     this.anims.create({
       key: "red-flower-idle",
       frameRate: 5,

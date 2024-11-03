@@ -15,13 +15,6 @@ class Field extends Phaser.Scene {
     this.keys = this.input.keyboard.createCursorKeys();
     this.player = new Player(this, 50, 50).setOrigin(0.5, 0.5);
 
-    this.flowerplayer = new FlowerPerson(
-      this,
-      100,
-      100,
-      "purple-flower"
-    ).setOrigin(0.5, 0.5);
-
     // adds flowers
     this.flowerGroup = this.add.group({
       runChildUpdate: true,
@@ -29,11 +22,14 @@ class Field extends Phaser.Scene {
     for (let i = 0; i < this.NUM_FLOWERS; i++) {
       this.addFlower();
     }
+
+    this.flowerPeopleGroup = this.add.group({
+      runChildUpdate: true,
+    });
   }
 
   update() {
     this.playerFSM.step();
-    this.flowerplayer.update();
 
     // player touching flower logic
     this.physics.overlap(this.player, this.flowerGroup, (player, flower) => {
@@ -44,6 +40,20 @@ class Field extends Phaser.Scene {
         this.addFlowerPerson();
       });
     });
+
+    // player touching flower people logic
+    this.physics.overlap(
+      this.player,
+      this.flowerPeopleGroup,
+      (player, flower) => {
+        flower.destroy();
+        this.scene.pause("fieldScene");
+        this.scene.launch("pluckScene");
+        this.time.delayedCall(this.REGROW_TIME, () => {
+          this.addFlowerPerson();
+        });
+      }
+    );
   }
 
   randomFlowerTexture() {
@@ -65,6 +75,6 @@ class Field extends Phaser.Scene {
     const x = Math.random() * (width - padding) + padding;
     const y = Math.random() * (height - padding) + padding;
     const flower = new FlowerPerson(this, x, y, texture).setVisible(true);
-    this.flowerGroup.add(flower);
+    this.flowerPeopleGroup.add(flower);
   }
 }
