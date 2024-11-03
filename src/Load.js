@@ -53,6 +53,14 @@ class Load extends Phaser.Scene {
       frameWidth: 20,
       frameHeight: 32,
     });
+    this.load.spritesheet("flower-appendages", "flower-appendages.png", {
+      frameWidth: 12,
+      frameHeight: 16,
+    });
+    this.load.spritesheet("flower-head", "flower-head.png", {
+      frameWidth: 18,
+      frameHeight: 18,
+    });
   }
   create() {
     // red human flower animation

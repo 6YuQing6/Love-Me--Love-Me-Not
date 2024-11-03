@@ -34,6 +34,7 @@ class Field extends Phaser.Scene {
 
     // player touching flower logic
     this.physics.overlap(this.player, this.flowerGroup, (player, flower) => {
+      this.registry.set('texturecoll', flower.texture)
       flower.destroy();
       this.scene.pause("fieldScene");
       this.scene.launch("pluckScene");
@@ -47,6 +48,8 @@ class Field extends Phaser.Scene {
       this.player,
       this.flowerPeopleGroup,
       (player, flower) => {
+        this.registry.set('texturecoll', flower.texture)
+        this.registry.set('human', flower.color)
         flower.destroy();
         this.scene.pause("fieldScene");
         this.scene.launch("pluckScene");

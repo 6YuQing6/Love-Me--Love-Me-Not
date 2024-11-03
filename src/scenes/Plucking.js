@@ -8,10 +8,9 @@ class Pluck extends Phaser.Scene {
   }
 
   create() {
-    cursors = this.input.keyboard.createCursorKeys();
-    let graphics = this.add.graphics();
-    graphics.fillStyle(0x000000, 0.5);
-    graphics.fillRect(0, 0, this.cameras.main.width, this.cameras.main.height);
+    this.thingy = this.registry.get('texturecoll');
+    this.human = this.registry.get('human');
+    this.actual = '';
     this.thewholeflower = [];
     this.thewholeflowerpositions = [
       [70, -110],
@@ -21,17 +20,104 @@ class Pluck extends Phaser.Scene {
       [0, 85],
       [0, 0],
     ];
-    for (let i = 0; i < 6; i += 1) {
-      this.thewholeflower.push(
-        this.physics.add.sprite(
-          this.scale.width / 2 + this.thewholeflowerpositions[i][0],
-          this.scale.height / 2 + this.thewholeflowerpositions[i][1],
-          "petal-blue",
-          i
-        )
-      );
-      if (i < 5) {
-        this.makeItDrag(this, this.thewholeflower[i]);
+    switch(this.thingy.key){
+      case 'blue-flower':
+        this.actual = 'petal-blue';
+        break;
+      case 'red-flower':
+        this.actual = 'petal-red';
+        break;
+      case 'purple-flower':
+        this.actual = 'petal-purple';
+        break;
+      case 'human-flower':
+        switch(this.human){
+            case 'purple-flower':
+              this.actual = 'petal-purple';
+              this.thewholeflowerpositions = [
+                [30, -120],
+                [40, 0],
+                [-60, -140],
+                [-30, 25]
+              ];
+              for (let i = 0; i < 4; i += 1) {
+                this.thewholeflower.push(
+                  this.physics.add.sprite(
+                    this.scale.width / 2 + this.thewholeflowerpositions[i][0],
+                    this.scale.height / 2 + this.thewholeflowerpositions[i][1],
+                    'flower-appendages',
+                    i+8
+                 ).setScale(20)
+                );
+                  this.makeItDrag(this, this.thewholeflower[i]);
+              }
+              this.thewholeflower.push(this.physics.add.sprite(this.scale.width/2, this.scale.height/2 - 300, 'flower-head', 0).setScale(20));
+              this.makeItDrag(this, this.thewholeflower[4]);
+              break;
+            case 'red-flower':
+              this.actual = 'petal-red';
+              this.thewholeflowerpositions = [
+                [30, -120],
+                [40, 0],
+                [-60, -140],
+                [-30, 25]
+              ];
+              for (let i = 0; i < 4; i += 1) {
+                this.thewholeflower.push(
+                  this.physics.add.sprite(
+                    this.scale.width / 2 + this.thewholeflowerpositions[i][0],
+                    this.scale.height / 2 + this.thewholeflowerpositions[i][1],
+                    'flower-appendages',
+                    i
+                 ).setScale(20)
+                );
+                  this.makeItDrag(this, this.thewholeflower[i]);
+              }
+              this.thewholeflower.push(this.physics.add.sprite(this.scale.width/2, this.scale.height/2 -300, 'flower-head', 0).setScale(20));
+              this.makeItDrag(this, this.thewholeflower[4]);
+              break;
+            case 'blue-flower':
+              this.actual = 'petal-blue';
+              this.thewholeflowerpositions = [
+                [30, -120],
+                [40, 0],
+                [-60, -140],
+                [-30, 25]
+              ];
+              for (let i = 0; i < 4; i += 1) {
+                this.thewholeflower.push(
+                  this.physics.add.sprite(
+                    this.scale.width / 2 + this.thewholeflowerpositions[i][0],
+                    this.scale.height / 2 + this.thewholeflowerpositions[i][1],
+                    'flower-appendages',
+                    i+4
+                 ).setScale(20)
+                );
+                  this.makeItDrag(this, this.thewholeflower[i]);
+              }
+              this.thewholeflower.push(this.physics.add.sprite(this.scale.width/2, this.scale.height/2 -300, 'flower-head', 0).setScale(20));
+              this.makeItDrag(this, this.thewholeflower[4]);
+              break;
+        }
+        break;
+    }
+    cursors = this.input.keyboard.createCursorKeys();
+    let graphics = this.add.graphics();
+    graphics.fillStyle(0x000000, 0.5);
+    graphics.fillRect(0, 0, this.cameras.main.width, this.cameras.main.height);
+    if(this.thingy.key != 'human-flower'){
+      for (let i = 0; i < 6; i += 1) {
+        this.thewholeflower.push(
+          this.physics.add.sprite(
+            this.scale.width / 2 + this.thewholeflowerpositions[i][0],
+            this.scale.height / 2 + this.thewholeflowerpositions[i][1],
+            this.actual,
+            i
+         )
+        );
+        if (i < 5) {
+          this.makeItDrag(this, this.thewholeflower[i]);
+        }
       }
     }
   }
@@ -82,7 +168,7 @@ class Pluck extends Phaser.Scene {
           const emitter = scene.add.particles(
             gameObject.x,
             gameObject.y,
-            "petal-blue",
+            this.actual,
             {
               lifespan: 4000,
               speed: { min: 250, max: 450 },
