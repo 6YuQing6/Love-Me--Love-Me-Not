@@ -8,7 +8,7 @@ class Instructions extends Phaser.Scene {
       .text(
         game.config.width / 2,
         game.config.height / 2,
-        "WASD TO MOVE\nRUN AROUND AND COLLECT FLOWERS TO EAT\nCLICK TO REMOVE PETALS",
+        "ARROW KEYS TO MOVE\nRUN AROUND AND COLLECT FLOWERS TO EAT\nCLICK TO REMOVE PETALS",
         { fontFamily: "After Hours", fontSize: 32 }
       )
       .setOrigin(0.5);

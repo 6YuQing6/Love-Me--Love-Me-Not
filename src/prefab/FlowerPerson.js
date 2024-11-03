@@ -1,5 +1,5 @@
 class FlowerPerson extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, y, color) {
+  constructor(scene, x, y, color, player) {
     super(scene, x, y, "human-flower");
     this.scene.add.existing(this);
     this.scene.physics.add.existing(this);
@@ -13,47 +13,49 @@ class FlowerPerson extends Phaser.Physics.Arcade.Sprite {
     this.flowerVelocity = 200;
 
     this.isMoving = false;
+    this.player = player; // Reference to the player
   }
 
   update() {
     const { left, right, up, down } = this.scene.keys;
 
     if (left.isDown || right.isDown || up.isDown || down.isDown) {
-      this.run();
+      this.runAwayFromPlayer();
     } else {
       this.idle();
     }
   }
 
   idle() {
-    this.setVelocity(0);
-    this.anims.play(`${this.color}-idle`);
+    // this.setVelocity(0);
+    // this.anims.play(`${this.color}-idle`);
   }
 
-  run() {
-    const { left, right, up, down } = this.scene.keys;
+  runAwayFromPlayer() {
+    // Calculate direction away from player
+    const awayDirection = new Phaser.Math.Vector2(
+      this.x - this.player.x,
+      this.y - this.player.y
+    ).normalize();
 
-    let moveDirection = new Phaser.Math.Vector2(0, 0);
-    if (up.isDown) {
-      moveDirection.y = -1;
-      this.direction = "up";
-    } else if (down.isDown) {
-      moveDirection.y = 1;
-      this.direction = "down";
-    }
-    if (left.isDown) {
-      moveDirection.x = -1;
-      this.direction = "left";
-    } else if (right.isDown) {
-      moveDirection.x = 1;
-      this.direction = "right";
-    }
+    // Add some randomness
+    awayDirection.x += Phaser.Math.FloatBetween(-0.5, 0.5);
+    awayDirection.y += Phaser.Math.FloatBetween(-0.5, 0.5);
+    awayDirection.normalize();
 
-    moveDirection.normalize();
+    // Set velocity in the randomized direction away from player
     this.setVelocity(
-      this.flowerVelocity * moveDirection.x,
-      this.flowerVelocity * moveDirection.y
+      this.flowerVelocity * awayDirection.x,
+      this.flowerVelocity * awayDirection.y
     );
-    this.anims.play(`${this.color}-walk-${this.direction}`, true);
+
+    // Determine the animation direction based on movement vector
+    if (Math.abs(awayDirection.x) > Math.abs(awayDirection.y)) {
+      this.direction = awayDirection.x > 0 ? "right" : "left";
+    } else {
+      this.direction = awayDirection.y > 0 ? "down" : "up";
+    }
+
+    // this.anims.play(`${this.color}-walk-${this.direction}`, true);
   }
 }
