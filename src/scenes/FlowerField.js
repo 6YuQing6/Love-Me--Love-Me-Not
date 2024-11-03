@@ -4,13 +4,14 @@ class Field extends Phaser.Scene {
   }
 
   init() {
-    this.NUM_FLOWERS = 10;
+    this.NUM_FLOWERS = 5;
     this.REGROW_TIME = 3000;
+    this.currentBackgroundColor = 0x9ac18a; // initial background color
   }
 
   create() {
     // background
-    this.cameras.main.setBackgroundColor("#78ac63");
+    this.cameras.main.setBackgroundColor(this.currentBackgroundColor);
 
     this.keys = this.input.keyboard.createCursorKeys();
     this.player = new Player(this, 50, 50).setOrigin(0.5, 0.5);
@@ -49,9 +50,7 @@ class Field extends Phaser.Scene {
         flower.destroy();
         this.scene.pause("fieldScene");
         this.scene.launch("pluckScene");
-        this.time.delayedCall(this.REGROW_TIME, () => {
-          this.addFlowerPerson();
-        });
+        this.darkenBackgroundColor();
       }
     );
   }
@@ -76,5 +75,21 @@ class Field extends Phaser.Scene {
     const y = Math.random() * (height - padding) + padding;
     const flower = new FlowerPerson(this, x, y, texture).setVisible(true);
     this.flowerPeopleGroup.add(flower);
+  }
+
+  darkenBackgroundColor() {
+    // Convert the current background color to a Phaser Display Color object
+    let color = Phaser.Display.Color.IntegerToColor(
+      this.currentBackgroundColor
+    );
+
+    // Reduce the lightness of the color
+    color.darken(10); // Adjust the value to control the amount of darkening
+
+    // Update the current background color
+    this.currentBackgroundColor = color.color;
+
+    // Set the new background color
+    this.cameras.main.setBackgroundColor(this.currentBackgroundColor);
   }
 }
