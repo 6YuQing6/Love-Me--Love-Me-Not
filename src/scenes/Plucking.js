@@ -51,7 +51,7 @@ class Pluck extends Phaser.Scene {
                 );
                   this.makeItDrag(this, this.thewholeflower[i]);
               }
-              this.thewholeflower.push(this.physics.add.sprite(this.scale.width/2, this.scale.height/2 - 300, 'flower-head', 0).setScale(20));
+              this.thewholeflower.push(this.physics.add.sprite(this.scale.width/2, this.scale.height/2 - 300, 'flower-heads', 2).setScale(20));
               this.makeItDrag(this, this.thewholeflower[4]);
               break;
             case 'red-flower':
@@ -73,7 +73,7 @@ class Pluck extends Phaser.Scene {
                 );
                   this.makeItDrag(this, this.thewholeflower[i]);
               }
-              this.thewholeflower.push(this.physics.add.sprite(this.scale.width/2, this.scale.height/2 -300, 'flower-head', 0).setScale(20));
+              this.thewholeflower.push(this.physics.add.sprite(this.scale.width/2, this.scale.height/2 -300, 'flower-heads', 0).setScale(20));
               this.makeItDrag(this, this.thewholeflower[4]);
               break;
             case 'blue-flower':
@@ -95,7 +95,7 @@ class Pluck extends Phaser.Scene {
                 );
                   this.makeItDrag(this, this.thewholeflower[i]);
               }
-              this.thewholeflower.push(this.physics.add.sprite(this.scale.width/2, this.scale.height/2 -300, 'flower-head', 0).setScale(20));
+              this.thewholeflower.push(this.physics.add.sprite(this.scale.width/2, this.scale.height/2 -300, 'flower-heads', 1).setScale(20));
               this.makeItDrag(this, this.thewholeflower[4]);
               break;
         }

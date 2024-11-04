@@ -57,9 +57,9 @@ class Load extends Phaser.Scene {
       frameWidth: 12,
       frameHeight: 16,
     });
-    this.load.spritesheet("flower-head", "flower-head.png", {
-      frameWidth: 18,
-      frameHeight: 18,
+    this.load.spritesheet("flower-heads", "flower-heads.png", {
+      frameWidth: 22,
+      frameHeight: 21,
     });
   }
   create() {
